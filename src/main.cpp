@@ -1,6 +1,15 @@
-#include <iostream>
+#include <stdio.h>
+#include <emscripten/bind.h>
 
 int main() {
-    std::cout << "Hello wordl!";
-    return 0;
+    printf("Hello world!\n");
+    return 1;
+}
+
+int add(int a, int b) {
+    return a + b;
+}
+
+EMSCRIPTEN_BINDINGS(JPS) {
+    emscripten::function("add", &add);
 }

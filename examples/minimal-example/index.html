@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EM Test</title>
-    <script type="text/javascript" src="client.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAssembly Test</title>
 </head>
 <body>
-Check browser console.
+    <script type="text/javascript" src="jps.js"></script>
+    <script type="text/javascript">
+        JPS().then(jps => {
+            console.log("Hello: ", jps);
+            window.jps = jps;
 
-<script type="text/javascript">
-window.onload = function() {
-	var instance = new Module.Application(); 
-	instance.Initialize();
-	instance.SayHello();
-}
-</script>
+            var a = jps._main();
+            var b = jps.add(a, 10);
+
+            console.log(a, "+ 10 =", b);
+        })
+    </script>
+    <!-- <script type="module">
+        import JPS from "./jps.js"
+        JPS().then(jps => {
+            console.log("Hello: ", jps);
+            window.jps = jps;
+        })
+    </script> -->
 </body>
 </html>
