@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_definitions("-Wall -Wcast-qual -Wno-unused-command-line-argument -fno-exceptions -std=c++11")
 
 # Project files
-add_executable(jps main.cpp)
+add_executable(jps main.cpp Grid.h Grid.cpp)
 
 # Compiler and linker flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORT_NAME=JPS \

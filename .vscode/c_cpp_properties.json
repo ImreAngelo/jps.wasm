@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/vendors/emsdk/upstream/emscripten/system/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc-11",

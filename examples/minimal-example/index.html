@@ -9,15 +9,34 @@
     <script type="text/javascript" src="jps.js"></script>
     <script type="text/javascript">
         JPS().then(jps => {
-            console.log("Hello: ", jps);
             window.jps = jps;
 
             var a = jps._main();
             var b = jps.add(a, 10);
+            var c = jps.add(b, 10);
+            var d = jps.add(a+b+c+d, 10);
 
-            console.log(a, "+ 10 =", b);
+            jps.printNodes();
         })
+
+        function add() {
+            let a = parseInt(document.getElementById("a").value);
+            let b = parseInt(document.getElementById("b").value);
+
+            let x = window.jps.add(a, b);
+            console.log(a, "+", b, "=", x);
+        }
+
+        function get() {
+            jps.printNodes();
+        }
     </script>
+    <div>
+        <input type="number" id="a"/>
+        <input type="number" id="b"/>
+        <button onclick="add()">Add node</button>
+        <button onclick="get()">Get nodes</button>
+    </div>
     <!-- <script type="module">
         import JPS from "./jps.js"
         JPS().then(jps => {
