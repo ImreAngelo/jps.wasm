@@ -1,0 +1,7 @@
+{
+  "name": "jps.wasm",
+  "packageManager": "yarn@4.5.1",
+  "scripts": {
+    "build": "cd build && emcmake cmake ../src && cmake --build ."
+  }
+}
