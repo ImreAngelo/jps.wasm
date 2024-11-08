@@ -5,6 +5,7 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+node_modules
 
 #!.yarn/cache
 .pnp.*
@@ -12,6 +13,7 @@
 # CMake
 build/*
 !build/jps.*
+!build/index.ts
 
 # IDE
 .vscode

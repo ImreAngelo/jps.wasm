@@ -1,10 +1,31 @@
 {
-  "name": "jps.wasm",
+  "name": "@pathfinding/jps",
+  "main": "./build/index.ts",
+  "files": ["/build/index.*", "/build/jps.*"],
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
   "packageManager": "yarn@4.5.1",
   "scripts": {
-    "prepare": "cd build && rm -rf * && emcmake cmake ../src",
+    "preparex": "cd build && rm -rf * && emcmake cmake ../src -DCMAKE_BUILD_TYPE=debug",
     "build:cmake": "cmake --build ./build",
-    "build": "yarn prepare && yarn build:cmake && yarn examples",
-    "examples": "cp build/jps.* examples/minimal-example"
-  }
+    "build": "bash ./scripts/build.sh",
+    "examples": "cp build/jps.* examples/minimal-example && cp build/jps.* examples/solidjs-example/src/jps/lib"
+  },
+  "workspaces": [
+    "examples/*"
+  ],
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImreAngelo/jps.wasm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ImreAngelo/jps.wasm/issues"
+  },
+  "homepage": "https://github.com/ImreAngelo/jps.wasm#readme"
 }
