@@ -7,9 +7,8 @@ set(CMAKE_CXX_STANDARD 11)
 add_definitions("-Wall -Wcast-qual -Wno-unused-command-line-argument -fno-exceptions -std=c++11")
 
 # Include typescript files
-configure_file(index.ts index.ts COPYONLY)
-configure_file(typescript/vector.ts vector.ts COPYONLY)
-configure_file(typescript/NodeVector.ts NodeVector.ts COPYONLY)
+configure_file(wrappers/index.ts index.ts COPYONLY)
+configure_file(wrappers/vector.ts vector.ts COPYONLY)
 
 # Project files
 # include_directories(.)

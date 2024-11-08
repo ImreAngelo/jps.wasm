@@ -41,4 +41,4 @@ export async function printNodes(): Promise<void> {
 
 
 // Types 
-// export { Vector, Node };
+export { Vector, Node };
