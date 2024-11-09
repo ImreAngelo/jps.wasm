@@ -20,7 +20,6 @@ declare namespace RuntimeExports {
     let HEAPU64: any;
 }
 interface WasmModule {
-  _main(_0: number, _1: number): number;
 }
 
 export interface ClassHandle {
@@ -34,7 +33,7 @@ export interface IntVector extends ClassHandle {
   push_back(_0: number): void;
   resize(_0: number, _1: number): void;
   size(): number;
-  get(_0: number): any;
+  get(_0: number): number | undefined;
   set(_0: number, _1: number): boolean;
 }
 
@@ -48,7 +47,7 @@ export interface INodeVector extends ClassHandle {
   push_back(_0: Node): void;
   resize(_0: number, _1: Node): void;
   size(): number;
-  get(_0: number): any;
+  get(_0: number): Node | undefined;
   set(_0: number, _1: Node): boolean;
 }
 
@@ -63,6 +62,7 @@ interface EmbindModule {
     new(): INodeVector;
   };
   makeMaze(_0: number, _1: number): INodeVector;
+  bfs(_0: number, _1: number, _2: number): INodeVector;
 }
 
 export type MainModule = WasmModule & typeof RuntimeExports & EmbindModule;

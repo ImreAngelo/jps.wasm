@@ -13,11 +13,6 @@ async function getInstance(): Promise<MainModule> {
     return instance as MainModule;
 }
 
-export async function add(a: number, b: number): Promise<number> {
-    const module = await getInstance();
-    return module.add(a, b);
-}
-
 /**
  * Generate a grid maze.
  * @param width 
@@ -25,20 +20,17 @@ export async function add(a: number, b: number): Promise<number> {
  */
 export async function makeMaze(width: number, height: number): Promise<Vector<Node>> {
     const module = await getInstance();
-    const vec = new Vector<Node>(module.makeMaze(width, height));
-    
-    // vec.forEach((v, i) => {
-    //     console.log(i, `:\t(${v.x}, ${v.y}) has flag ${v.flags}`);
-    // })
-
-    return vec;
+    return new Vector<Node>(module.makeMaze(width, height));
 }
 
-export async function printNodes(): Promise<void> {
+/**
+ * 
+ * @param from 
+ * @param to 
+ * @param size 
+ * @returns 
+ */
+export async function bfs(from: number, to: number, size: number): Promise<Vector<Node>> {
     const module = await getInstance();
-    return module.printNodes();
+    return new Vector<Node>(module.bfs(from, to, size));
 }
-
-
-// Types 
-// export { Vector, Node };

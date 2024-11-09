@@ -27,6 +27,8 @@ namespace Grid {
     }
 
     std::vector<Node> makeMaze(int width, int height);
+
+    std::vector<Node> bfs(int from, int to, int size = 10);
 };
 
 EMSCRIPTEN_BINDINGS(jps) {
@@ -42,4 +44,6 @@ EMSCRIPTEN_BINDINGS(jps) {
         ;
 
     emscripten::register_vector<Node>("INodeVector");
+    
+    emscripten::function("bfs", &Grid::bfs);
 };

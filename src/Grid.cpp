@@ -1,10 +1,10 @@
 #include "Grid.h"
+#include <queue>
+#include <unordered_set>
 
 std::vector<Node> Grid::makeMaze(int width, int height)
 {
     typedef std::vector<Node> grid;
-
-    // std::vector<int> xvals;
 
     grid n;
     n.reserve(width * height);
@@ -47,14 +47,68 @@ std::vector<Node> Grid::makeMaze(int width, int height)
                 n[nx * height + ny].flags = 0; // Set neighbor as walkable
                 n[current.x * height + current.y].flags = 1; // Set current as walkable
                 walls.push_back({nx, ny, 0});
-                // xvals.push_back(current.x);
             }
         }
     }
 
     nodes = n;
-
-    // Debug
     return n;
-    // return xvals;
+}
+
+std::vector<Node> Grid::bfs(int from, int to, int size)
+{
+    using namespace std;
+
+    Node start = Grid::nodes[from];
+    Node end = Grid::nodes[to];
+
+    unordered_map<Node*, Node*> closed{{ &start, &start }};
+    queue<int> q{{ from }};
+    
+    // Direction vectors for neighbors (8-directional)
+    const int dx[8] = {-1, 0, 1,-1, 1,-1, 0, 1 };
+    const int dy[8] = {-1,-1,-1, 0, 0, 1, 1, 1 };
+
+    while(!q.empty())
+    {
+        int index = q.front();
+        Node* node = &Grid::nodes[index];
+        q.pop();
+
+        // Path found -> Rebuild from parents
+        if(index == to)
+        {   
+            vector<Node> path;
+            while(node->x != start.x || node->y != start.y)
+            {
+                path.push_back(*node);
+                node = closed[node];
+            }
+
+            path.push_back(start);
+            reverse(path.begin(), path.end());
+            return path;
+        }
+
+        // Add neighbours
+        for(auto i = 0; i < 8; i++) {
+            auto x = node->x + dx[i];
+            auto y = node->y + dy[i];
+
+            // Out-of-bounds
+            if(x < 0 || x >= size || y < 0 || y >= size)
+                continue;
+
+            Node* n = &Grid::nodes[x*size + y];
+
+            // Not in closed list or unwalkable
+            if(!n->flags || closed.contains(n))
+                continue;
+
+            closed.emplace(n, node);
+            q.push(x*size + y);
+        }
+    }
+
+    return {};
 };
